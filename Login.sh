@@ -1,4 +1,5 @@
 # login(){
+    source quizpage.sh
 #  DB_HOST="localhost"
 # DB_USER="varshita"
 # DB_PASS="root"
@@ -49,20 +50,22 @@ function login() {
 
     if [[ -n "$result" ]]; then 
         zenity --title "Login to Quizee" --info --text "Login successful! Have fun with the questions!" --width=400 --height=100 --ok-label="Ok" 
+        quizpage "$email"
         
-    else 
+
+    else
         try_again_option=$(zenity --title "Login to Quizee" --question --text "Invalid email or password. Do you want to try again?" --width=400 --height=100 --ok-label="Yes" --cancel-label="No")
 
         if [ "$try_again_option" == "Yes" ]; then 
             login 
         else 
-            reset_password_option=$(zenity --title "Login to Quizee" --question --text "Do you want to reset your password?" --width=400 --height=100 --ok-label="Yes" --cancel-label="No")
+            #reset_password_option=$(zenity --title "Login to Quizee" --question --text "Do you want to reset your password?" --width=400 --height=100 --ok-label="Yes" --cancel-label="No")
 
-            if [ "$reset_password_option" == "Yes" ]; then 
-                reset_password 
-            else 
-                zenity --title "Login to Quizee" --info --text "PLEASE TRY TO LOGIN AGAIN, !" --width=400 --height=100 --ok-label="Ok"
-            fi 
+            #if [ "$reset_password_option" == "Yes" ]; then 
+             #   reset_password 
+            #else 
+        zenity --title "Login to Quizee" --info --text "PLEASE TRY TO LOGIN AGAIN, !" --width=400 --height=100 --ok-label="Ok"
+            #fi 
         fi 
     fi 
 }

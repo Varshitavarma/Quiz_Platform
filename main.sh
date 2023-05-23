@@ -39,8 +39,8 @@ response=$(zenity --list \
                    --column="Name" \
                    1 "User" \
                    2 "Publisher" \
-                   --width=250 \
-                   --height=150 \
+                   --width=550 \
+                   --height=350 \
                    --ok-label="OK" \
                    --cancel-label="Exit")
 
@@ -67,7 +67,7 @@ esac
 
 
 function show_menu() {
-    choice=$(zenity --list --title "Quiz Platform" --text "Who are you?" --column "Option" --column "Description" 1 "New User! Register yourself" 2 "Already a user! Login")
+    choice=$(zenity --list --title "Quiz Platform" --text "Who are you?" --column "Option" --column "Description" 1 "New User! Register yourself" 2 "Already a user! Login" --width=550  --height=350)
     
     case $choice in
         1)
@@ -91,3 +91,4 @@ function show_menu() {
 welcome
 
 show_menu
+`
