@@ -12,8 +12,6 @@ fi
 
 # Create a new Excel sheet.
 excel_file="export.xlsx"
-
-# Open the Excel sheet.
 excel=$(open "$excel_file")
 
 # Get the number of lines in the bash file.
