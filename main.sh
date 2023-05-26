@@ -29,7 +29,7 @@ DB_PASS="root"
 DB_NAME="quiz"
 
 function welcome() {
-    zenity --notification --text "Hello, Hi , THis is a quizeeee day ."
+    zenity --notification --text "Hello, Hi , This is a quizeeee day ."
     zenity --info --title "Quiz Platform" --text "Welcome to Quiz Platform!"
 }
 response=$(zenity --list \
@@ -54,6 +54,7 @@ case $? in
                 ;;
             *)
                 echo "Publisher selected"
+                # source questions.sh
                 ;;
             
         esac
@@ -63,6 +64,16 @@ case $? in
         exit
         ;;
 esac
+
+# function schedule_quiz() {
+#     name=$(zenity --entry --title "Quiz Scheduler" --text "Enter your name:")
+#     datetime=$(zenity --calendar --title "Quiz Scheduler" --text "Select the scheduled date and time:" --date-format="%Y-%m-%d %H:%M" --editable)
+#     formatted_datetime=$(date -d "$datetime" +'%Y-%m-%d %H:%M:%S')
+
+#     mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -D $DB_NAME -e "INSERT INTO quiz_schedule (user_name, scheduled_time) VALUES ('$name', '$formatted_datetime');"
+
+#     zenity --info --title "Quiz Scheduler" --text "Quiz scheduled successfully!"
+# }
 
 
 
@@ -79,16 +90,15 @@ function show_menu() {
         2)
             source Login.sh
             login
-            ;;
+            ;; 
         *)
            
             exit 1
             ;;
     esac
+
 }
 
 
-welcome
-
 show_menu
-`
+# i need a option where i can get the option to add the questions in thetable where all the quizes are made.

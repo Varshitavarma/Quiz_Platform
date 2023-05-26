@@ -22,9 +22,12 @@ function register() {
         if [ "$password" == "$confirm_password" ]; then
             mysql -u $DB_USER -p$DB_PASS -D $DB_NAME -e "INSERT INTO user_credentials (user_name, email, password) VALUES ('$user_name', '$email', '$password')"
             
-            if [ $? -eq 0 ]; then
+            if [ $? -eq 0 ];
+             then
                 zenity --info --title "Register New User" --text "Registration successful."
-                break
+                source Login.sh
+            break
+
             else
                 zenity --error --title "Register New User" --text "Failed to register user. Please try again."
             fi
