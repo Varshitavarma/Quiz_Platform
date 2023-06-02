@@ -7,25 +7,25 @@ DB_PASS="root"
 DB_NAME="quiz"
 
 function register() {
-    user_name=$(zenity --entry --title "Register New User" --text "Enter your Name:")
-    email=$(zenity --entry --title "Register New User" --text "Enter your Email Id:")
+    user_name=$(zenity --entry --title "Register New admin" --text "Enter your Name:")
+    email=$(zenity --entry --title "Register New admin" --text "Enter your Email Id:")
     
     while true; do
-        password=$(zenity --password --title "Register New User" --text "Enter your Password:")
-        confirm_password=$(zenity --password --title "Register New User" --text "Enter your Confirm Password:")
+        password=$(zenity --password --title "Register New admin" --text "Enter your Password:")
+        confirm_password=$(zenity --password --title "Register New admin" --text "Enter your Confirm Password:")
         
         if [ $? -ne 0 ]; then
-            zenity --error --title "Register New User" --text "User cancelled the input."
+            zenity --error --title "Register New admin" --text "admin cancelled the input."
             exit 1
         fi
         
         if [ "$password" == "$confirm_password" ]; then
-            mysql -u $DB_USER -p$DB_PASS -D $DB_NAME -e "INSERT INTO user_credentials (user_name, email, password) VALUES ('$user_name', '$email', '$password')"
+            mysql -u $DB_USER -p$DB_PASS -D $DB_NAME -e "INSERT INTO publisher_cred (user_name, email, password) VALUES ('$user_name', '$email', '$password')"
             
             if [ $? -eq 0 ];
              then
                 zenity --info --title "Register New User" --text "Registration successful."
-                source Login.sh
+            source adminlogin.sh
             break
 
             else
@@ -38,4 +38,3 @@ function register() {
 }
 
 register
-source login.sh

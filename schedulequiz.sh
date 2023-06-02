@@ -121,16 +121,15 @@ schedule_quiz() {
     end_duration=$(( $(date -d "$end_datetime" +%s) - $(date -d "$current_datetime" +%s) ))
 
     if [ $start_duration -gt 0 ] && [ $end_duration -gt 0 ] && [ $end_duration -gt $start_duration ]; then
-        # Display quiz details using Zenity dialog
+      
         zenity --info --title "Quiz Scheduler" --text "Quiz: $quiz_name\nStart Time: $start_datetime\nEnd Time: $end_datetime"
 
-        # Database insertion query
+       
         insert_query="INSERT INTO quiz (quiz_name, start_datetime, end_datetime) VALUES ('$quiz_name', '$start_datetime', '$end_datetime')"
 
-        # Execute database insertion query
+       
         mysql -h "$localhost" -u "$varshita" -p"$root" "$quiz" -e "$insert_query"
 
-        # Check if insertion was successful
         if [ $? -eq 0 ]; then
             sleep $start_duration
             zenity --info --title "Quiz Scheduler" --text "It's time for the $quiz_name quiz!"
@@ -145,5 +144,4 @@ schedule_quiz() {
     fi
 }
 
-# Call the function to schedule the quiz
 schedule_quiz
